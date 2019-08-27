@@ -1,0 +1,117 @@
+프로젝트 3 : 길 찾기 문제 해결 프로그램의 코드 오류 수정]
+1)연구소 이름 : gold챠오니 도깨비 연구소
+2)연구소가 해결하려는 문제 : classcard형식의 지구과학 암기 학습 게임을 개발해 
+통합과학을 배우면서 암기과목에 어려움을 느끼고 있는 평범한 1학년 고등학생을 도우려 한다. 
+3)연구소의 깃헙 링크
+https://github.com/keumchaewon/keumjeong/blob/greatsong/project
+4)내가 기여한 내용
+(코드, 주석, 문서화 등 내가 기여한 내용을 복붙해주세요)
+import matplotlib.pyplot as plt
+from matplotlib.image import imread
+
+import random
+
+pic = ['갑주어_고생대_.PNG', '공룡_중생대_.PNG', '매머드_신생대_.PNG', '방추충_고생대_.PNG',
+       '삼엽충_고생대_.PNG', '스트로마톨라이트_선캄브리아_.PNG', '암모나이트_중생대_.PNG', 
+       '디킨소니아_선캄브리아_.PNG', '필석_고생대_.PNG', '화폐석_신생대_.PNG']
+
+easy = [ '공룡_중생대_.PNG', '매머드_신생대_.PNG', '화폐석_신생대_.PNG']
+
+hard = ['갑주어_고생대_.PNG', '방추충_고생대_.PNG',
+       '삼엽충_고생대_.PNG', '스트로마톨라이트_선캄브리아_.PNG', '암모나이트_중생대_.PNG', 
+       '디킨소니아_선캄브리아_.PNG', '필석_고생대_.PNG']
+
+
+game = True
+
+nscore = 0
+score = 0
+
+#cho = input("이름 학습을 플레이하려면 1, 시대 학습을 플레이하려면 2를 입력해주세요.")
+
+while game == True :
+    
+    cho = input("이름 학습을 플레이하려면 1, 시대 학습을 플레이하려면 2를 입력해주세요.")
+    
+    if cho in "1, 2" :
+
+        while pic != [] :
+            a = random.randint(0, len(pic)-1)
+            play = pic.pop(a)
+            img = imread(play)
+            plt.imshow(img)
+            plt.show()
+
+            name = input("답을 입력해주세요. (학습을 중단하시려면 '그만'을 입력하세요)")
+
+            if name == "그만" :
+                print("학습을 중단하셨습니다. 현재까지 누적 점수는", nscore, "점 입니다.")
+                break
+
+            elif cho == '1' :
+                if name == play.split('_')[0] :
+                    if play.split('_')[0] in easy:
+                        print("정답입니다. +1")
+                    	score += 1
+                    	nscore += 1
+                    else :
+                        print("정답입니다. +2")
+                    	score += 2
+                    	nscore += 2
+                else :
+                	 if play.split('_')[0] in easy:
+                        print("오답입니다. -1", "( 답 :", play.split('_')[0], “)”)
+                    	score -= 1
+                    	nscore -= 1
+                    else :
+                        print("오답입니다. -2", "( 답 :", play.split('_')[0], “)”)
+                    	score -= 2
+                    	nscore -= 2
+                    pic.append(play)
+
+            elif cho == '2' :
+                if name == play.split('_')[1] :
+                    if play.split('_')[1] in easy:
+                        print("정답입니다. +1")
+                    	score += 1
+                    	nscore += 1
+                    else :
+                        print("정답입니다. +2")
+                    	score += 2
+                    	nscore += 2
+                else :
+                	 if play.split('_')[1] in easy:
+                        print("오답입니다. -1", "( 답 :", play.split('_')[1], “)”)
+                    	score -= 1
+                    	nscore -= 1
+                    else :
+                        print("오답입니다. -2", "( 답 :", play.split('_')[1], “)”)
+                    	score -= 2
+                    	nscore -= 2
+                    pic.append(play)        
+
+        print("학습 완료. 당신의 점수는", score, "점 입니다.(누적 점수 :", nscore, ")")
+        
+        new = input("새 게임을 시작하시겠습니까? 예 / 아니오")
+        
+        if new == '예' :
+            game = True
+            score = 0
+            pic = ['갑주어_고생대_.PNG', '공룡_중생대_.PNG', '매머드_신생대_.PNG', '방추충_고생대_.PNG',
+           '삼엽충_고생대_.PNG', '스트로마톨라이트_선캄브리아_.PNG', '암모나이트_중생대_.PNG', 
+           '디킨소니아_선캄브리아_.PNG', '필석_고생대_.PNG', '화폐석_신생대_.PNG']
+        else : 
+            game = False
+
+                
+    else :
+        game = False
+        print("입력이 잘못되었습니다.")
+        
+print("학습이 종료됩니다.")
+5)내가 기여한 내용에 대한 설명
+(자신이 어떤 기여를 한 것인지 설명해주세요)
+문제를 채점하는 데 있어 각 문제의 배점을 다르게 하였다. 
+예를 들어 메머드, 공룡 같은 맞추기 쉬운 문제를 1점으로 배점하였고, 
+갑주어,필석 같은 어려운 문제는 2점으로 배점하였다. 틀렸을 때 빼는 점수도 이에 맞추어 채점하도록 하였다.
+6)내가 기여한 내용의 반영 여부 : (O,X 중 선택해주세요)
